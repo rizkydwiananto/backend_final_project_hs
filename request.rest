@@ -1,0 +1,22 @@
+GET http://localhost:5000/profilPekerja
+
+###
+POST http://localhost:5000/profilPekerja
+Content-Type: application/json
+
+{
+    "nama_depan": "Rizky",
+    "nama_belakang": "Ananto",
+    "email": "rizkyananto@gmail.com",
+    "profesi": "Fullstack Developer",
+    "panggilan": "Rizky",
+    "tempat_lahir": "Jakarta",
+    "tanggal_lahir": "1995-08-20",
+    "jns_kel": "L",
+    "nomor_hp": "081219058757",
+    "domisili": "Jakarta",
+    "detail_tentang_saya": "ini isi panjang tentang saya, bla bla bla",
+    "password": "asdasdasd",
+    "id_pekerja_edit": 0,
+    "id_pekerja_delete": 0
+}
