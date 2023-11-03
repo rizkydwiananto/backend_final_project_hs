@@ -1,4 +1,6 @@
 import { PrismaClient } from "@prisma/client";
+import { hash } from "../utils/hasPassword.js";
+// import { verifiedPass } from "../utils/verifiedPassword.js";
 
 const prisma = new PrismaClient();
 
@@ -25,8 +27,6 @@ export const createProfilPekerja = async (req, res) => {
     domisili,
     detail_tentang_saya,
     password,
-    id_pekerja_edit,
-    id_pekerja_delete,
   } = req.body;
 
   try {
@@ -43,9 +43,7 @@ export const createProfilPekerja = async (req, res) => {
         nomor_hp: nomor_hp,
         domisili: domisili,
         detail_tentang_saya: detail_tentang_saya,
-        password: password,
-        id_pekerja_edit: id_pekerja_edit,
-        id_pekerja_delete: id_pekerja_delete,
+        password: hash(password),
       },
     });
     res.status(201).json(profilPekerja);
@@ -53,3 +51,9 @@ export const createProfilPekerja = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+// export const verifiedPassword = async (req, res) => {
+//   const { password, hasPassword } = req.query;
+
+//   return res.json({ message: verifiedPass(password, hasPassword) });
+// };

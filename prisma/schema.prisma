@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,24 +8,30 @@ datasource db {
 }
 
 model profil_pekerja {
-  id_pekerja Int @id @default(autoincrement())
-  nama_depan String @db.VarChar(20)
-  nama_belakang String @db.VarChar(20)
-  email String @unique
-  profesi String @db.VarChar(30)
-  panggilan String @db.VarChar(20)
-  tempat_lahir String @db.VarChar(20)
-  tanggal_lahir String @db.VarChar(10) //YYYY-MM-DD
-  jns_kel Role @default(L)
-  nomor_hp String @db.VarChar(15)
-  domisili String @db.VarChar(20)
-  detail_tentang_saya String @db.Text
-  password String @db.VarChar(225)
-  created_dttm DateTime @default(now())
-  id_pekerja_edit Int
-  edited_dttm DateTime @default(now())
-  id_pekerja_delete Int
-  deleted_dttm DateTime @default(now())
+  id_pekerja          Int      @id @default(autoincrement())
+  nama_depan          String   @db.VarChar(20)
+  nama_belakang       String   @db.VarChar(20)
+  email               String   @unique
+  profesi             String   @db.VarChar(30)
+  panggilan           String   @db.VarChar(20)
+  tempat_lahir        String   @db.VarChar(20)
+  tanggal_lahir       String   @db.VarChar(10)
+  jns_kel             Role     @default(L)
+  nomor_hp            String   @db.VarChar(15)
+  domisili            String   @db.VarChar(20)
+  detail_tentang_saya String   @db.Text
+  password            String   @db.VarChar(225)
+  created_dttm        DateTime @default(now())
+  id_pekerja_edit     Int?
+  edited_dttm         DateTime @default(now())
+  id_pekerja_delete   Int?
+  deleted_dttm        DateTime @default(now())
+}
+
+model lowongan_favorite {
+  id_lowongan_favorite  Int @id @default(autoincrement())
+  id_deskripsi_lowongan Int
+  id_pekerja            Int
 }
 
 enum Role {
