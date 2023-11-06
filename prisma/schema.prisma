@@ -8,24 +8,26 @@ datasource db {
 }
 
 model profil_pekerja {
-  id_pekerja          Int       @id @default(autoincrement())
-  nama_depan          String    @db.VarChar(20)
-  nama_belakang       String    @db.VarChar(20)
-  email               String    @unique
-  profesi             String    @db.VarChar(30)
-  panggilan           String    @db.VarChar(20)
-  tempat_lahir        String    @db.VarChar(20)
-  tanggal_lahir       String    @db.VarChar(10)
-  jns_kel             Role      @default(L)
-  nomor_hp            String    @db.VarChar(15)
-  domisili            String    @db.VarChar(20)
-  detail_tentang_saya String    @db.Text
-  password            String    @db.VarChar(225)
-  created_dttm        DateTime  @default(now())
+  id_pekerja          Int                   @id @default(autoincrement())
+  nama_depan          String                @db.VarChar(20)
+  nama_belakang       String                @db.VarChar(20)
+  email               String                @unique
+  profesi             String                @db.VarChar(30)
+  panggilan           String                @db.VarChar(20)
+  tempat_lahir        String                @db.VarChar(20)
+  tanggal_lahir       String                @db.VarChar(10)
+  jns_kel             Role                  @default(L)
+  nomor_hp            String                @db.VarChar(15)
+  domisili            String                @db.VarChar(20)
+  detail_tentang_saya String                @db.Text
+  password            String                @db.VarChar(225)
+  created_dttm        DateTime              @default(now())
   id_pekerja_edit     Int?
   edited_dttm         DateTime?
   id_pekerja_delete   Int?
   deleted_dttm        DateTime?
+  foto_pekerja        String?               @db.VarChar(200)
+  status              profil_pekerja_status @default(active)
 }
 
 model lowongan_favorite {
@@ -35,22 +37,24 @@ model lowongan_favorite {
 }
 
 model perusahaan {
-  id_perusahaan             Int       @id @default(autoincrement())
-  nama_perusahaan           String    @db.VarChar(30)
-  alamat                    String    @db.Text
-  detail_tentang_perusahaan String    @db.Text
-  detail_alamat             String    @db.Text
-  detail_website            String    @db.VarChar(100)
-  sos_ig                    String    @db.VarChar(100)
-  sos_fb                    String    @db.VarChar(100)
-  sos_linkedin              String    @db.VarChar(100)
-  sos_x                     String    @db.VarChar(100)
+  id_perusahaan             Int               @id @default(autoincrement())
+  nama_perusahaan           String            @db.VarChar(30)
+  alamat                    String            @db.Text
+  detail_tentang_perusahaan String            @db.Text
+  detail_alamat             String            @db.Text
+  detail_website            String            @db.VarChar(100)
+  sos_ig                    String            @db.VarChar(100)
+  sos_fb                    String            @db.VarChar(100)
+  sos_linkedin              String            @db.VarChar(100)
+  sos_x                     String            @db.VarChar(100)
   id_perusahaan_add         Int?
   created_dttm              DateTime?
   id_perusahaan_edit        Int?
   edited_dttm               DateTime?
   id_perusahaan_delete      Int?
   deleted_dttm              DateTime?
+  foto_perusahaan           String            @db.VarChar(200)
+  status                    perusahaan_status @default(active)
 }
 
 model apply_lowongan {
@@ -65,27 +69,29 @@ model apply_lowongan {
   edited_dttm           DateTime?
   id_perusahaan_delete  Int?
   deleted_dttm          DateTime?
+  status                apply_lowongan_status     @default(active)
 }
 
 model deskripsi_lowongan {
-  deskripsi_lowongan    Int       @id @default(autoincrement())
+  deskripsi_lowongan    Int                       @id @default(autoincrement())
   id_deskripsi_lowongan Int?
-  judul                 String    @db.VarChar(100)
+  judul                 String                    @db.VarChar(100)
   id_perusahaan         Int?
-  alamat_penempatan     String    @db.Text
-  minimal_pendidikan    String    @db.VarChar(100)
+  alamat_penempatan     String                    @db.Text
+  minimal_pendidikan    String                    @db.VarChar(100)
   gaji                  Int?
-  detail_deskripsi      String    @db.Text
-  detail_kualifikasi    String    @db.Text
-  detail_benefit        String    @db.Text
-  detail_cara_melamar   String    @db.Text
-  detail_catatan        String    @db.Text
+  detail_deskripsi      String                    @db.Text
+  detail_kualifikasi    String                    @db.Text
+  detail_benefit        String                    @db.Text
+  detail_cara_melamar   String                    @db.Text
+  detail_catatan        String                    @db.Text
   id_perusahaan_add     Int?
   created_dttm          DateTime?
   id_perusahaan_edit    Int?
   edited_dttm           DateTime?
   id_perusahaan_delete  Int?
   deleted_dttm          DateTime?
+  status                deskripsi_lowongan_status @default(active)
 }
 
 enum Role {
@@ -97,4 +103,24 @@ enum apply_lowongan_keterangan {
   send_company
   accepted
   not_accepted
+}
+
+enum apply_lowongan_status {
+  active
+  non_active
+}
+
+enum perusahaan_status {
+  active
+  non_active
+}
+
+enum deskripsi_lowongan_status {
+  active
+  non_active
+}
+
+enum profil_pekerja_status {
+  active
+  non_active
 }
