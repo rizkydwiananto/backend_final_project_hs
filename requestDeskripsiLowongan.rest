@@ -1,0 +1,43 @@
+GET http://localhost:5000/deskripsiLowongan
+
+### GET http://localhost:5000/deskripsiLowongan/1
+
+### POST http://localhost:5000/deskripsiLowongan Content-Type: application/json
+
+{
+ "judul": "Perusahaan A",
+ "id_perusahaan": "1" ,
+ "alamat_penempatan": "Jakarta",
+ "minimal_pendidikan": "SMA",
+ "gaji": "200000",
+ "detail_deskripsi": "detail deskripsi",
+ "detail_kualifikasi": "detail kualifikasi",
+ "detail_benefit": "detail benefit",
+ "detail_cara_melamar": "detail cara melamar",
+ "detail_catatan": "detail_catatan",
+ "id_perusahaan_add": "1",
+}
+
+### PUT http://localhost:5000/updateDeskripsiLowongan/1 Content-Type: application/json
+
+{
+ "judul": "Perusahaan B",
+ "id_perusahaan": "1" ,
+ "alamat_penempatan": "Surabaya",
+ "minimal_pendidikan": "S1",
+ "gaji": "300000",
+ "detail_deskripsi": "detail deskripsi1",
+ "detail_kualifikasi": "detail kualifikasi1",
+ "detail_benefit": "detail benefit1",
+ "detail_cara_melamar": "detail cara melamar1",
+ "detail_catatan": "detail catatan1",
+ "id_perusahaan_edit": "1",
+}
+
+### PUT http://localhost:5000/deleteChangesDeskripsiLowongan/1 Content-Type: application/json
+
+{
+"id_perusahaan_delete": 1
+}
+
+### DELETE http://localhost:5000/deleteDataDeskripsiLowongan/2
