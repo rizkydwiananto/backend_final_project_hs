@@ -8,9 +8,9 @@ POST http://localhost:5000/profilPekerja
 Content-Type: application/json
 
 {
-    "nama_depan": "Fery",
+    "nama_depan": "Fery21321",
     "nama_belakang": "Nugraha",
-    "email": "nugnug@gmail.com",
+    "email": "nug321nug@gmail.com",
     "profesi": "Fullstack Developer",
     "panggilan": "testing",
     "tempat_lahir": "Semarang",

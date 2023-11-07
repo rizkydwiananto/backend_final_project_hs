@@ -1,0 +1,9 @@
+CATATAN
+Table Perusahaan
+- default created_dttm, edited_dttm, deleted_dttm belum disetting ke current timestamp dan Null nya masih Yes jadi masih bisa kosong
+- Belum ada usernama/email, password untuk registrasi dan login
+- Kolom foto perusahaan mungkin null nya Yes saja karena mungkin ada kemungkinan saat awal awal belum ada foto perusahaan jadi nanti uploadnya di page profil perusahaan, bukan saat register
+- Untuk value dari kolom id_perusahaan_edit kan integer, berarti kita input nya nanti number kan? bukan number as string?
+
+
+- Ubah waktu ke lokal (Indonesia) ?
