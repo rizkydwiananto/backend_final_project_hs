@@ -6,6 +6,7 @@ import {
   updateProfilPekerja,
   deleteTesProfilPekerja,
   deleteChangesProfilPekerja,
+  loginPekerja,
 } from "../controllers/ProfilPekerjaController.js";
 
 const router = express.Router();
@@ -13,6 +14,7 @@ const router = express.Router();
 router.get("/profilPekerja", getProfilPekerja);
 router.get("/profilPekerja/:id", getProfilPekerjaById);
 router.post("/profilPekerja", createProfilPekerja);
+router.post("/loginPekerja", loginPekerja);
 router.put("/profilPekerja/:id", updateProfilPekerja);
 router.put("/deleteChangesProfilPekerja/:id", deleteChangesProfilPekerja);
 router.delete("/profilPekerja/:id", deleteTesProfilPekerja);

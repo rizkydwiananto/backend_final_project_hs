@@ -4,12 +4,15 @@ GET http://localhost:5000/applyLowongan
 GET http://localhost:5000/applyLowongan/1
 
 ###
+GET http://localhost:5000/applyLowonganPekerja/1
+
+###
 POST http://localhost:5000/applyLowongan
 Content-Type: application/json
 
 {
     "id_deskripsi_lowongan": 1,
-    "id_pekerja": 1,
+    "id_pekerja": 10,
     "catatan": "menunggu proses selanjutnya",
     "id_perusahaan_add": 1
 }

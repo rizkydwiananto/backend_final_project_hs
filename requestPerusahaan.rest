@@ -1,0 +1,56 @@
+# Get all perusahaan data
+GET http://localhost:5000/perusahaan
+
+# Get perusahaan data by id
+###
+GET http://localhost:5000/perusahaan/3
+
+# Create a perusahaan data
+###
+POST http://localhost:5000/perusahaan
+Content-Type: application/json
+
+{
+    "nama_perusahaan": "PT.Test6Update",
+    "alamat": "PT.Test6Update",
+    "detail_tentang_perusahaan": "PT.Test6Update",
+    "detail_alamat": "PT.Test6Update",
+    "detail_website": "PT.Test6Update",
+    "sos_ig": "PT.Test6Update",
+    "sos_fb": "PT.Test6Update",
+    "sos_linkedin": "PT.Test6Update",
+    "sos_x": "PT.Test6Update",
+    "foto_perusahaan": "PT.Test6Update.png"
+}
+
+# Update a perusahaan data
+###
+PUT  http://localhost:5000/updatePerusahaan/1
+Content-Type: application/json
+
+{
+    "nama_perusahaan": "PT.Test6Update",
+    "alamat": "PT.Test6Update",
+    "detail_tentang_perusahaan": "PT.Test6Update",
+    "detail_alamat": "PT.Test6Update",
+    "detail_website": "PT.Test6Update",
+    "sos_ig": "PT.Test1",
+    "sos_fb": "PT.Test1",
+    "sos_linkedin": "PT.Test1",
+    "sos_x": "PT.Test1",
+    "id_perusahaan_edit": 1,
+    "foto_perusahaan": "PT.Test1.png"
+}
+
+# Delete (non_active) a perusahaan data
+###
+PUT  http://localhost:5000/deleteChangesPerusahaan/2
+Content-Type: application/json
+
+{
+    "id_perusahaan_delete": 2
+}
+
+# Delete a perusahaan data
+###
+DELETE http://localhost:5000/deleteDataPerusahaan/3

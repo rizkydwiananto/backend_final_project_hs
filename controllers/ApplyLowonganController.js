@@ -15,6 +15,23 @@ export const getApplyLowongan = async (req, res) => {
   }
 };
 
+export const getApplyLowonganByIdPekerja = async (req, res) => {
+  try {
+    const response = await prisma.apply_lowongan.findMany({
+      where: {
+        id_pekerja: Number(req.params.id),
+      },
+    });
+    res.status(200).json({
+      code: 200,
+      message: "Sukses",
+      data: response,
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const getApplyLowonganById = async (req, res) => {
   try {
     const response = await prisma.apply_lowongan.findUnique({

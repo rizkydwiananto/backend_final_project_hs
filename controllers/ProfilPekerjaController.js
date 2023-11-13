@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { hash } from "../utils/hasPassword.js";
-// import { verifiedPass } from "../utils/verifiedPassword.js";
+import { verifiedPass } from "../utils/verifiedPassword.js";
+import { getToken } from "../utils/jwtModule.js";
 
 const prisma = new PrismaClient();
 
@@ -170,8 +171,63 @@ export const deleteChangesProfilPekerja = async (req, res) => {
   }
 };
 
-// export const verifiedPassword = async (req, res) => {
-//   const { password, hasPassword } = req.query;
+export const loginPekerja = async (req, res) => {
+  const { email, password } = req.body;
 
-//   return res.json({ message: verifiedPass(password, hasPassword) });
-// };
+  //email tidak boleh kosong
+  if (!email) {
+    return res.status(404).json({ message: "email tidak boleh kosong" });
+  }
+
+  //password tidak boleh kosong
+  if (!password) {
+    return res.status(404).json({ message: "password tidak boleh kosong" });
+  }
+
+  //get Query dari data profil pekerja
+  const cekEmail = await prisma.profil_pekerja.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  //tess
+  //return res.status(201).json({ cekEmail });
+
+  //cek apabila tidak ada email yg dimaksud
+  if (!cekEmail) {
+    return res.status(404).json({ message: "email tidak ditemukan" });
+  }
+
+  //cek jika password valid
+  const isPasswordValid = verifiedPass(password, cekEmail.password);
+  if (isPasswordValid) {
+    const payload = {
+      nama_depan: cekEmail.nama_depan,
+      nama_belakang: cekEmail.nama_belakang,
+      email: cekEmail.email,
+      profesi: cekEmail.profesi,
+      panggilan: cekEmail.panggilan,
+      tempat_lahir: cekEmail.tempat_lahir,
+      tanggal_lahir: cekEmail.tanggal_lahir,
+      jns_kel: cekEmail.jns_kel,
+      nomor_hp: cekEmail.nomor_hp,
+      domisili: cekEmail.domisili,
+      detail_tentang_saya: cekEmail.detail_tentang_saya,
+      foto_pekerja: cekEmail.foto_pekerja,
+    };
+
+    const token = getToken(payload);
+
+    return res.status(201).json({
+      code: 201,
+      message: "Sukses",
+      data: payload,
+      token: token,
+    });
+  } else {
+    return res.status(403).json({
+      message: "Password Salah",
+    });
+  }
+};
