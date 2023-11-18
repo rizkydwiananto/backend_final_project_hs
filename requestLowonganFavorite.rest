@@ -1,0 +1,16 @@
+GET http://localhost:5000/lowonganFavorite
+
+###
+GET http://localhost:5000/lowonganFavorite/7
+
+###
+POST http://localhost:5000/lowonganFavorite
+Content-Type: application/json
+
+{
+    "id_deskripsi_lowongan": 1,
+    "id_pekerja": 9
+}
+
+###
+DELETE  http://localhost:5000/lowonganFavorite/8

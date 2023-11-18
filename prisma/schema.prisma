@@ -47,7 +47,6 @@ model perusahaan {
   sos_fb                    String            @db.VarChar(100)
   sos_linkedin              String            @db.VarChar(100)
   sos_x                     String            @db.VarChar(100)
-  id_perusahaan_add         Int?
   created_dttm              DateTime?
   id_perusahaan_edit        Int?
   edited_dttm               DateTime?
@@ -73,8 +72,7 @@ model apply_lowongan {
 }
 
 model deskripsi_lowongan {
-  deskripsi_lowongan    Int                       @id @default(autoincrement())
-  id_deskripsi_lowongan Int?
+  id_deskripsi_lowongan Int                       @id @default(autoincrement())
   judul                 String                    @db.VarChar(100)
   id_perusahaan         Int?
   alamat_penempatan     String                    @db.Text

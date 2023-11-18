@@ -4,22 +4,32 @@ GET http://localhost:5000/profilPekerja
 GET http://localhost:5000/profilPekerja/1
 
 ###
+POST http://localhost:5000/loginPekerja
+Content-Type: application/json
+
+{
+    "email": "rizkyddddddddd@gmail.com",
+    "password": "12345"
+}
+
+
+###
 POST http://localhost:5000/profilPekerja
 Content-Type: application/json
 
 {
-    "nama_depan": "Fery",
-    "nama_belakang": "Nugraha",
-    "email": "nugnug@gmail.com",
+    "nama_depan": "Rizky D.A",
+    "nama_belakang": "Belakang",
+    "email": "rizkyddddddddd@gmail.com",
     "profesi": "Fullstack Developer",
-    "panggilan": "testing",
+    "panggilan": "Dwi",
     "tempat_lahir": "Semarang",
     "tanggal_lahir": "1995-08-20",
     "jns_kel": "L",
     "nomor_hp": "123456789",
     "domisili": "Semarang",
-    "detail_tentang_saya": "ini isi panjang tentang saya, bla bla bla",
-    "password": "`12sdfg&*90"
+    "detail_tentang_saya": "saya merupakan junior fullstack developer",
+    "password": "12345"
 }
 
 ###
@@ -27,7 +37,7 @@ PUT http://localhost:5000/profilPekerja/1
 Content-Type: application/json
 
 {
-    "nama_depan": "POST Depan",
+    "nama_depan": "Rizky D.A",
     "nama_belakang": "Nama Belakang",
     "email": "depanbelakang@gmail.com",
     "profesi": "Programmer",

@@ -1,0 +1,40 @@
+GET http://localhost:5000/applyLowongan
+
+###
+GET http://localhost:5000/applyLowongan/1
+
+###
+GET http://localhost:5000/applyLowonganPekerja/1
+
+###
+POST http://localhost:5000/applyLowongan
+Content-Type: application/json
+
+{
+    "id_deskripsi_lowongan": 1,
+    "id_pekerja": 10,
+    "catatan": "menunggu proses selanjutnya",
+    "id_perusahaan_add": 1
+}
+
+###
+PUT http://localhost:5000/applyLowongan/1
+Content-Type: application/json
+
+{
+    "id_deskripsi_lowongan": 1,
+    "id_pekerja": 1,
+    "keterangan": "not_accepted",
+    "catatan": "tidak diterima",
+    "id_perusahaan_edit": 1
+}
+
+###
+PUT http://localhost:5000/deleteApplyLowongan/1
+Content-Type: application/json
+
+{
+    "id_perusahaan_delete": 1,
+    "catatan": "sudah kadaluarsa",
+    "status": "non_active"
+}
