@@ -35,6 +35,6 @@ Content-Type: application/json
 
 {
     "id_perusahaan_delete": 1,
-    "catatan": "sudah kadaluarsa",
+    "catatan": "testing sudah kadaluarsa 19-11-2023",
     "status": "non_active"
 }

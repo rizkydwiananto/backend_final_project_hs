@@ -7,7 +7,11 @@ export const getDeskripsiLowongan = async (req, res) => {
   const url_link = new URL(`${req.protocol}://${req.get("host")}`);
 
   try {
-    const response = await prisma.deskripsi_lowongan.findMany();
+    const response = await prisma.deskripsi_lowongan.findMany({
+      where: {
+        status: "active",
+      },
+    });
 
     const dataMapingDeskLow = response.map(async (item) => {
       //getPerusahaan

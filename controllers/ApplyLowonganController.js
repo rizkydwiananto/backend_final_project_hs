@@ -33,16 +33,46 @@ export const getApplyLowonganByIdPekerja = async (req, res) => {
 };
 
 export const getApplyLowonganById = async (req, res) => {
+  const url_link = new URL(`${req.protocol}://${req.get("host")}`);
+
   try {
     const response = await prisma.apply_lowongan.findUnique({
       where: {
         id_apply_lowongan: Number(req.params.id),
       },
     });
+
+    const dataDeskripsiLowongan = await prisma.deskripsi_lowongan.findUnique({
+      where: {
+        id_deskripsi_lowongan: response.id_deskripsi_lowongan,
+      },
+    });
+
+    const fotoPerusahaan = await prisma.perusahaan.findUnique({
+      where: {
+        id_perusahaan: dataDeskripsiLowongan.id_perusahaan,
+      },
+    });
+
     res.status(200).json({
       code: 200,
       message: "Sukses",
-      data: response,
+      data: {
+        id_apply_lowongan: response.id_apply_lowongan,
+        id_deskripsi_lowongan: response.id_deskripsi_lowongan,
+        id_pekerja: response.id_pekerja,
+        keterangan: response.keterangan,
+        catatan: response.catatan,
+        id_perusahaan_add: response.id_perusahaan_add,
+        created_dttm: response.created_dttm,
+        id_perusahaan_edit: response.id_perusahaan_edit,
+        edited_dttm: response.edited_dttm,
+        id_perusahaan_delete: response.id_perusahaan_delete,
+        deleted_dttm: response.deleted_dttm,
+        status: response.status,
+        detailDeskripsiLowongan: dataDeskripsiLowongan,
+        fotoPerusahaan: url_link + "" + fotoPerusahaan.foto_perusahaan,
+      },
     });
   } catch (error) {
     res.status(404).json({ message: error.message });
