@@ -40,6 +40,7 @@ export const getDeskripsiLowongan = async (req, res) => {
         id_perusahaan_delete: item.id_perusahaan_delete,
         deleted_dttm: item.deleted_dttm,
         status: item.status,
+        nm_perusahaan: getPerusahaan.nama_perusahaan,
         foto_perusahaan: url_link + "" + getPerusahaan.foto_perusahaan,
       };
 
@@ -60,6 +61,9 @@ export const getDeskripsiLowongan = async (req, res) => {
 };
 
 export const getDeskripsiLowonganById = async (req, res) => {
+  //get Link
+  const url_link = new URL(`${req.protocol}://${req.get("host")}`);
+
   try {
     const response = await prisma.deskripsi_lowongan.findUnique({
       where: {
@@ -67,7 +71,7 @@ export const getDeskripsiLowonganById = async (req, res) => {
       },
     });
 
-    const fotoPerusahaan = await prisma.perusahaan.findUnique({
+    const detailPerusahaan = await prisma.perusahaan.findUnique({
       where: {
         id_perusahaan: response.id_perusahaan,
       },
@@ -95,7 +99,8 @@ export const getDeskripsiLowonganById = async (req, res) => {
         id_perusahaan_delete: response.id_perusahaan_delete,
         deleted_dttm: response.deleted_dttm,
         status: response.status,
-        foto_perusahaan: fotoPerusahaan.foto_perusahaan,
+        foto_perusahaan: url_link + "" + detailPerusahaan.foto_perusahaan,
+        nm_perusahaan: detailPerusahaan.nama_perusahaan,
       },
     });
   } catch (error) {

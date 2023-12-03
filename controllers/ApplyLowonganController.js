@@ -16,16 +16,58 @@ export const getApplyLowongan = async (req, res) => {
 };
 
 export const getApplyLowonganByIdPekerja = async (req, res) => {
+  //get Link
+  const url_link = new URL(`${req.protocol}://${req.get("host")}`);
+
   try {
     const response = await prisma.apply_lowongan.findMany({
       where: {
         id_pekerja: Number(req.params.id),
       },
     });
+
+    const dataMappingApplyByIDPekerja = response.map(async (item) => {
+      //getPerusahaan
+      const getPerusahaan = await prisma.perusahaan.findUnique({
+        where: {
+          id_perusahaan: item.id_perusahaan_add,
+        },
+      });
+
+      //getDeskripsiLowongan
+      const getDeskripsiLowonganById =
+        await prisma.deskripsi_lowongan.findUnique({
+          where: {
+            id_deskripsi_lowongan: item.id_deskripsi_lowongan,
+          },
+        });
+
+      const result = {
+        id_apply_lowongan: item.id_apply_lowongan,
+        id_deskripsi_lowongan: item.id_deskripsi_lowongan,
+        id_pekerja: item.id_pekerja,
+        keterangan: item.keterangan,
+        catatan: item.catatan,
+        id_perusahaan_add: item.id_perusahaan_add,
+        created_dttm: item.created_dttm,
+        id_perusahaan_edit: item.id_perusahaan_edit,
+        edited_dttm: item.edited_dttm,
+        id_perusahaan_delete: item.id_perusahaan_delete,
+        deleted_dttm: item.deleted_dttm,
+        status: item.status,
+        // judul_lowongan: getDeskripsiLowonganById.judul,
+        // deskripsi_lowongan: getDeskripsiLowonganById.detail_deskripsi,
+        nama_perusahaan: getPerusahaan.nama_perusahaan,
+        foto_perusahaan: url_link + "" + getPerusahaan.foto_perusahaan,
+      };
+
+      return result;
+    });
+
     res.status(200).json({
       code: 200,
       message: "Sukses",
-      data: response,
+      data: await Promise.all(dataMappingApplyByIDPekerja),
     });
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -83,23 +125,42 @@ export const createApplyLowongan = async (req, res) => {
   const { id_deskripsi_lowongan, id_pekerja, catatan, id_perusahaan_add } =
     req.body;
 
-  try {
-    const applyLowongan = await prisma.apply_lowongan.create({
-      data: {
-        id_deskripsi_lowongan: Number(id_deskripsi_lowongan),
-        id_pekerja: Number(id_pekerja),
-        catatan: catatan,
-        id_perusahaan_add: Number(id_perusahaan_add),
-        created_dttm: new Date(),
-      },
-    });
-    res.status(201).json({
-      code: 201,
-      message: "Create Apply Lowongan Sukses",
-      data: applyLowongan,
-    });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  //Cek Jika idPekerja dan idDeskripsiLowongan sudah pernah daftar
+  const ishasApplied = await prisma.apply_lowongan.findFirst({
+    where: {
+      id_pekerja: Number(id_pekerja),
+      id_deskripsi_lowongan: Number(id_deskripsi_lowongan),
+    },
+  });
+
+  // res.status(201).json({
+  //   code: 201,
+  //   message: ishasApplied,
+  // });
+
+  if (!ishasApplied) {
+    try {
+      const applyLowongan = await prisma.apply_lowongan.create({
+        data: {
+          id_deskripsi_lowongan: Number(id_deskripsi_lowongan),
+          id_pekerja: Number(id_pekerja),
+          catatan: catatan,
+          id_perusahaan_add: Number(id_perusahaan_add),
+          created_dttm: new Date(),
+        },
+      });
+      res.status(201).json({
+        code: 201,
+        message: "Create Apply Lowongan Sukses",
+        data: applyLowongan,
+      });
+    } catch (error) {
+      res.status(400).json({ code: 400, message: error.message });
+    }
+  } else {
+    res
+      .status(400)
+      .json({ code: 400, message: "Anda sudah pernah melamar pekerjaan ini" });
   }
 };
 
@@ -157,5 +218,29 @@ export const deleteChangesApplyLowongan = async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+export const getTotalApplyLowonganFavoritByIdPekerja = async (req, res) => {
+  try {
+    const response = await prisma.apply_lowongan.aggregate({
+      where: {
+        id_pekerja: Number(req.params.id),
+      },
+      _count: {
+        id_pekerja: true,
+      },
+    });
+
+    res.status(200).json({
+      code: 200,
+      message: "Sukses",
+      data: {
+        id_pekerja: Number(req.params.id),
+        totalApplyLowonganFavorite: response._count.id_pekerja,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({ code: 404, message: error.message });
   }
 };

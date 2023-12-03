@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
     "id_deskripsi_lowongan": 1,
-    "id_pekerja": 9
+    "id_pekerja": 11
 }
 
 ###

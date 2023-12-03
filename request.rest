@@ -1,7 +1,8 @@
+
 GET http://localhost:5000/profilPekerja
 
 ###
-GET http://localhost:5000/profilPekerja/1
+GET http://localhost:5000/profilPekerja/11
 
 ###
 POST http://localhost:5000/loginPekerja
@@ -20,7 +21,7 @@ Content-Type: application/json
 {
     "nama_depan": "Rizky D.A",
     "nama_belakang": "Belakang",
-    "email": "rizkyddddddddd@gmail.com",
+    "email": "testing12345@gmail.com",
     "profesi": "Fullstack Developer",
     "panggilan": "Dwi",
     "tempat_lahir": "Semarang",
@@ -53,6 +54,16 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:5000/profilPekerja/1
+
+###
+PUT http://localhost:5000/updatePasswordPekerja/11
+
+Content-Type: application/json
+{
+    "email": "rizkyddddddddd@gmail.com",
+    "passwordLama": "12345",
+    "email": "asdasd"
+}
 
 ###
 PUT http://localhost:5000/deleteChangesProfilPekerja/3

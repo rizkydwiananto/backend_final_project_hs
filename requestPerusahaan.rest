@@ -11,15 +11,15 @@ POST http://localhost:5000/perusahaan
 Content-Type: application/json
 
 {
-    "nama_perusahaan": "PT.Test6Update",
-    "alamat": "PT.Test6Update",
-    "detail_tentang_perusahaan": "PT.Test6Update",
-    "detail_alamat": "PT.Test6Update",
-    "detail_website": "PT.Test6Update",
-    "sos_ig": "PT.Test6Update",
-    "sos_fb": "PT.Test6Update",
-    "sos_linkedin": "PT.Test6Update",
-    "sos_x": "PT.Test6Update",
+    "nama_perusahaan": "Gojek",
+    "alamat": "DKI Jakarta",
+    "detail_tentang_perusahaan": "Gojek merupakan sebuah perusahaan teknologi asal Indonesia yang melayani angkutan melalui jasa ojek",
+    "detail_alamat": "Pasaraya Blok M Gedung B Lt. 6 Jalan Iskandarsyah II No.7, RW. 2, Melawai, Kebayoran Baru, RT.3/RW.1, Melawai, Kby. Baru Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12160",
+    "detail_website": "https://www.gojek.com/",
+    "sos_ig": "https://www.gojek.com/",
+    "sos_fb": "https://www.gojek.com/",
+    "sos_linkedin": "https://www.gojek.com/",
+    "sos_x": "https://www.gojek.com/",
     "foto_perusahaan": "PT.Test6Update.png"
 }
 

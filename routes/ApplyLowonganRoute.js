@@ -6,6 +6,7 @@ import {
   getApplyLowonganByIdPekerja,
   updateApplyLowongan,
   deleteChangesApplyLowongan,
+  getTotalApplyLowonganFavoritByIdPekerja,
 } from "../controllers/ApplyLowonganController.js";
 import { accessValidation } from "../utils/jwtModule.js";
 
@@ -18,7 +19,12 @@ router.get(
   accessValidation,
   getApplyLowonganByIdPekerja
 );
-router.post("/applyLowongan", createApplyLowongan);
+router.get(
+  "/totalApplyLowonganPekerja/:id",
+  accessValidation,
+  getTotalApplyLowonganFavoritByIdPekerja
+);
+router.post("/applyLowongan", accessValidation, createApplyLowongan);
 router.put("/applyLowongan/:id", updateApplyLowongan);
 router.put("/deleteApplyLowongan/:id", deleteChangesApplyLowongan);
 
