@@ -307,10 +307,21 @@ export const loginPekerja = async (req, res) => {
     return res.status(404).json({ message: "email tidak ditemukan" });
   }
 
+  /** j_kel **/
+  let j_kel = "";
+
+  if (cekEmail.jns_kel == "L") {
+    j_kel = "Laki-laki";
+  } else {
+    j_kel = "Perempuan";
+  }
+  /** j_kel **/
+
   //cek jika password valid
   const isPasswordValid = verifiedPass(password, cekEmail.password);
   if (isPasswordValid) {
     const payload = {
+      id_pekerja: cekEmail.id_pekerja,
       nama_depan: cekEmail.nama_depan,
       nama_belakang: cekEmail.nama_belakang,
       email: cekEmail.email,
@@ -319,6 +330,7 @@ export const loginPekerja = async (req, res) => {
       tempat_lahir: cekEmail.tempat_lahir,
       tanggal_lahir: cekEmail.tanggal_lahir,
       jns_kel: cekEmail.jns_kel,
+      jKel: j_kel,
       nomor_hp: cekEmail.nomor_hp,
       domisili: cekEmail.domisili,
       detail_tentang_saya: cekEmail.detail_tentang_saya,
