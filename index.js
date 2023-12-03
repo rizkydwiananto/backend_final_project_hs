@@ -17,7 +17,7 @@ import DeskripsiLowonganRoute from "./routes/DeskripsiLowonganRoute.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-//fungsi penyimpanan foto
+//fungsi penyimpanan foto perusahaan
 const filesStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "images");
@@ -44,7 +44,7 @@ dotenv.config();
 
 const app = express();
 
-//middleware multer upload foto
+//middleware multer upload foto perusahaan
 app.use(
   multer({ storage: filesStorage, fileFilter: fileFilter }).single("image")
 );

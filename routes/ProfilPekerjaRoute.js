@@ -7,15 +7,18 @@ import {
   deleteTesProfilPekerja,
   deleteChangesProfilPekerja,
   loginPekerja,
+  updatePasswordPekerja,
 } from "../controllers/ProfilPekerjaController.js";
+import { accessValidation } from "../utils/jwtModule.js";
 
 const router = express.Router();
 
 router.get("/profilPekerja", getProfilPekerja);
-router.get("/profilPekerja/:id", getProfilPekerjaById);
+router.get("/profilPekerja/:id", accessValidation, getProfilPekerjaById);
 router.post("/profilPekerja", createProfilPekerja);
 router.post("/loginPekerja", loginPekerja);
-router.put("/profilPekerja/:id", updateProfilPekerja);
+router.put("/profilPekerja/:id", accessValidation, updateProfilPekerja);
+router.put("/updatePasswordPekerja/:id", updatePasswordPekerja);
 router.put("/deleteChangesProfilPekerja/:id", deleteChangesProfilPekerja);
 router.delete("/profilPekerja/:id", deleteTesProfilPekerja);
 

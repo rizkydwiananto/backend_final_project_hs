@@ -4,13 +4,26 @@ import {
   createLowonganFavorite,
   getLowonganFavoritById,
   deleteLowonganFavorite,
+  getLowonganFavoritByIdPekerja,
+  getTotalLowonganFavoritByIdPekerja,
 } from "../controllers/LowonganFavorite.js";
+import { accessValidation } from "../utils/jwtModule.js";
 
 const router = express.Router();
 
 router.get("/lowonganFavorite", getLowonganFavorite);
 router.get("/lowonganFavorite/:id", getLowonganFavoritById);
-router.post("/lowonganFavorite", createLowonganFavorite);
+router.get(
+  "/lowonganFavoriteByIdPekerja/:id",
+  accessValidation,
+  getLowonganFavoritByIdPekerja
+);
+router.get(
+  "/totallowonganFavoriteByIdPekerja/:id",
+  accessValidation,
+  getTotalLowonganFavoritByIdPekerja
+);
+router.post("/lowonganFavorite", accessValidation, createLowonganFavorite);
 router.delete("/lowonganFavorite/:id", deleteLowonganFavorite);
 
 export default router;

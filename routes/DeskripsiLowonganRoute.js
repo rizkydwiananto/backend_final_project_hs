@@ -7,16 +7,12 @@ import {
   getDeskripsiLowonganById,
   updateDeskripsiLowongan,
 } from "../controllers/DeskripsiLowonganController.js";
-import { accessValidation } from "../utils/jwtModule.js";
+// import { accessValidation } from "../utils/jwtModule.js";
 
 const router = express.Router();
 
 router.get("/deskripsiLowongan", getDeskripsiLowongan);
-router.get(
-  "/deskripsiLowongan/:id",
-  accessValidation,
-  getDeskripsiLowonganById
-);
+router.get("/deskripsiLowongan/:id", getDeskripsiLowonganById);
 router.post("/deskripsiLowongan", createDeskripsiLowongan);
 router.put("/updateDeskripsiLowongan/:id", updateDeskripsiLowongan);
 router.put(
