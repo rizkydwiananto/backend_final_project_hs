@@ -12,14 +12,14 @@ model profil_pekerja {
   nama_depan          String                @db.VarChar(20)
   nama_belakang       String                @db.VarChar(20)
   email               String                @unique
-  profesi             String                @db.VarChar(30)
-  panggilan           String                @db.VarChar(20)
-  tempat_lahir        String                @db.VarChar(20)
-  tanggal_lahir       String                @db.VarChar(10)
-  jns_kel             Role                  @default(L)
+  profesi             String?               @db.VarChar(30)
+  panggilan           String?               @db.VarChar(20)
+  tempat_lahir        String?               @db.VarChar(20)
+  tanggal_lahir       String?               @db.VarChar(10)
+  jns_kel             Role?                 @default(L)
   nomor_hp            String                @db.VarChar(15)
-  domisili            String                @db.VarChar(20)
-  detail_tentang_saya String                @db.Text
+  domisili            String?               @db.VarChar(20)
+  detail_tentang_saya String?               @db.Text
   password            String                @db.VarChar(225)
   created_dttm        DateTime              @default(now())
   id_pekerja_edit     Int?
@@ -39,20 +39,23 @@ model lowongan_favorite {
 model perusahaan {
   id_perusahaan             Int               @id @default(autoincrement())
   nama_perusahaan           String            @db.VarChar(30)
-  alamat                    String            @db.Text
-  detail_tentang_perusahaan String            @db.Text
-  detail_alamat             String            @db.Text
-  detail_website            String            @db.VarChar(100)
-  sos_ig                    String            @db.VarChar(100)
-  sos_fb                    String            @db.VarChar(100)
-  sos_linkedin              String            @db.VarChar(100)
-  sos_x                     String            @db.VarChar(100)
+  email                     String            @unique
+  password                  String            @db.VarChar(225)
+  nomor_hp                  String            @db.VarChar(15)
+  alamat                    String?           @db.Text
+  detail_tentang_perusahaan String?           @db.Text
+  detail_alamat             String?           @db.Text
+  detail_website            String?           @db.VarChar(100)
+  sos_ig                    String?           @db.VarChar(100)
+  sos_fb                    String?           @db.VarChar(100)
+  sos_linkedin              String?           @db.VarChar(100)
+  sos_x                     String?           @db.VarChar(100)
   created_dttm              DateTime?
   id_perusahaan_edit        Int?
   edited_dttm               DateTime?
   id_perusahaan_delete      Int?
   deleted_dttm              DateTime?
-  foto_perusahaan           String            @db.VarChar(200)
+  foto_perusahaan           String?           @db.VarChar(200)
   status                    perusahaan_status @default(active)
 }
 
@@ -81,8 +84,8 @@ model deskripsi_lowongan {
   detail_deskripsi      String                    @db.Text
   detail_kualifikasi    String                    @db.Text
   detail_benefit        String                    @db.Text
-  detail_cara_melamar   String                    @db.Text
-  detail_catatan        String                    @db.Text
+  detail_cara_melamar   String?                   @db.Text
+  detail_catatan        String?                   @db.Text
   id_perusahaan_add     Int?
   created_dttm          DateTime?
   id_perusahaan_edit    Int?
