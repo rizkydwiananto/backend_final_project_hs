@@ -38,6 +38,9 @@ model lowongan_favorite {
 
 model perusahaan {
   id_perusahaan             Int               @id @default(autoincrement())
+  email                     String            @db.VarChar(100)
+  password                  String            @db.Text
+  nomor_wa                  String            @db.VarChar(20)
   nama_perusahaan           String            @db.VarChar(30)
   alamat                    String            @db.Text
   detail_tentang_perusahaan String            @db.Text
